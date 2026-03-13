@@ -10,7 +10,7 @@ Help organize the Obsidian vault.
 ## Instructions
 
 1. Ask the user which operation they want, or infer from context:
-   - **inbox** — Process pending notes in Inbox
+   - **inbox** — Process pending notes in the detected inbox folder (for example `1-Input`)
    - **moc** — Generate/update Map of Content for an area
    - **orphans** — Find notes with no tags or links
    - **tags** — Show tag statistics
@@ -27,7 +27,7 @@ obsi organize tags [--path "<path>"]
 3. For inbox processing:
    - Show the list of pending notes
    - For each note, suggest a classification
-   - Help the user move notes to the right location
+   - Help the user move notes to the right detected location
 
 ## Available areas for MOC:
 健康, 技术与工具, 财富, 阅读, 唱歌, 商业, 服饰, 英语与职业, 饮食

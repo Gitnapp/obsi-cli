@@ -48,4 +48,5 @@ User's additional context or thoughts
 
 ## After collection:
 - Report what was saved and where
+- Mention the resolved folder path when it helps the user understand the detected vault structure
 - Suggest relevant tags if none were provided

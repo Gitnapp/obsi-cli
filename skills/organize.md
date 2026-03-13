@@ -14,7 +14,7 @@ Help the user organize their Obsidian vault.
 ```bash
 obsi organize inbox
 ```
-Show pending notes and help user classify them.
+Show pending notes from the detected inbox folder and help user classify them.
 
 ### Generate MOC (Map of Content)
 ```bash

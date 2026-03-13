@@ -36,8 +36,9 @@ obsi note "<title>" --content "<content>" --tags "<tags>" [--area "<area>"] [--p
 - Book/reading notes → `--area "阅读"`
 - Health/fitness → `--area "健康"`
 - Business/marketing → `--area "商业"`
-- If unsure, omit the area flag (auto-classifier will handle it)
+- If unsure, omit the area flag so obsi can auto-classify using the detected vault structure
 
 ### After creation:
 - Report the file path to the user
 - Mention which engine was used (obsidian-cli or direct-file)
+- If relevant, mention that the path reflects the vault's detected folders (such as `2-Distilled/` or `Projects/`)
