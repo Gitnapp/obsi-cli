@@ -1,9 +1,15 @@
 {
-  "plugins": {
-    "obsi": {
+  "name": "obsi-plugins",
+  "description": "Agent-powered Obsidian note management",
+  "owner": {
+    "name": "bo"
+  },
+  "plugins": [
+    {
       "name": "obsi",
       "description": "Agent-powered Obsidian note management. Create, search, collect, and organize notes via CLI commands.",
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "source": "./"
     }
-  }
+  ]
 }
