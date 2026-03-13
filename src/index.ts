@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
+import { initCommand } from './commands/init.js'
 import { noteCommand } from './commands/note.js'
 import { dailyCommand } from './commands/daily.js'
 import { searchCommand } from './commands/search.js'
@@ -14,6 +15,12 @@ program
   .name('obsi')
   .description('Agent-powered CLI for Obsidian note management')
   .version('0.1.0')
+
+program
+  .command('init')
+  .description('Initialize obsi with your Obsidian vault path')
+  .argument('[vault-path]', 'Path to Obsidian vault')
+  .action(initCommand)
 
 program
   .command('note')

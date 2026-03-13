@@ -34,7 +34,7 @@ export function classifyNote(title: string, content: string, tags?: string[]): s
   }
 
   // Require at least 2 keyword matches for confidence
-  if (bestScore >= 2 && KNOWN_AREAS.includes(bestArea as typeof KNOWN_AREAS[number])) {
+  if (bestScore >= 2 && KNOWN_AREAS.includes(bestArea)) {
     return join('3. Areas', bestArea)
   }
 
