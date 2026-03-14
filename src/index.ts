@@ -30,6 +30,7 @@ program
   .option('-a, --area <name>', 'Target area (e.g. 技术与工具)')
   .option('-p, --project <name>', 'Target project')
   .option('-r, --resource <name>', 'Target resource folder')
+  .option('--inbox', 'Save directly to inbox (1-Input), no auto-classify')
   .option('-t, --tags <tags>', 'Comma-separated tags')
   .option('--from-file <path>', 'Read content from file')
   .option('--from-stdin', 'Read content from stdin')

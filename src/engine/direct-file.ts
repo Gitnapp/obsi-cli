@@ -145,6 +145,7 @@ export class DirectFileEngine implements ExecutionEngine {
   }
 
   private resolveTargetDir(opts: NoteOptions): string {
+    if (opts.inbox) return INBOX_DIR
     if (opts.area) return join(PARA.areas, opts.area)
     if (opts.project) return join(PARA.projects, opts.project)
     if (opts.resource) return join(PARA.resources, opts.resource)

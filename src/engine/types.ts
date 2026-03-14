@@ -4,6 +4,7 @@ export interface NoteOptions {
   area?: string
   project?: string
   resource?: string
+  inbox?: boolean
   tags?: string[]
   source?: 'claude-code' | 'web' | 'manual' | 'agent'
   type?: 'note' | 'research' | 'project' | 'daily' | 'moc'

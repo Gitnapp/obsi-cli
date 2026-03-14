@@ -8,6 +8,7 @@ interface NoteCommandOptions {
   area?: string
   project?: string
   resource?: string
+  inbox?: boolean
   tags?: string
   fromFile?: string
   fromStdin?: boolean
@@ -43,6 +44,7 @@ export async function noteCommand(title: string, opts: NoteCommandOptions) {
     area: opts.area,
     project: opts.project,
     resource: opts.resource,
+    inbox: opts.inbox,
     tags,
     source: (opts.source as 'claude-code' | 'web' | 'manual' | 'agent') ?? 'agent',
     type: (opts.type as 'note' | 'research' | 'project') ?? 'note',
