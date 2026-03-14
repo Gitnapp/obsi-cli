@@ -5,7 +5,6 @@ import { initCommand } from './commands/init.js'
 import { noteCommand } from './commands/note.js'
 import { dailyCommand } from './commands/daily.js'
 import { searchCommand } from './commands/search.js'
-import { collectCommand } from './commands/collect.js'
 import { organizeCommand } from './commands/organize.js'
 import { statusCommand } from './commands/status.js'
 
@@ -54,17 +53,6 @@ program
   .option('-t, --tags <tags>', 'Filter by tags (comma-separated)')
   .option('-l, --limit <n>', 'Max results', '20')
   .action(searchCommand)
-
-program
-  .command('collect')
-  .description('Collect content from URL or text')
-  .argument('[url]', 'URL to collect from')
-  .option('--text <text>', 'Text content to collect')
-  .option('--title <title>', 'Note title')
-  .option('-a, --area <name>', 'Target area')
-  .option('-r, --resource <name>', 'Target resource folder')
-  .option('-t, --tags <tags>', 'Comma-separated tags')
-  .action(collectCommand)
 
 program
   .command('organize')

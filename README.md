@@ -1,6 +1,6 @@
 # obsi
 
-Agent-powered CLI for Obsidian note management. Create, search, collect, and organize notes from the terminal or any AI agent.
+Agent-powered CLI for Obsidian note management. Create, search, and organize notes from the terminal or any AI agent.
 
 By default, obsi now adapts to the vault's real folder layout instead of assuming classic PARA names. In the current `Notee` vault, that means folders like `1-Input/`, `2-Distilled/`, `Projects/`, `3-Archived/`, and `Periodic/` are detected automatically.
 
@@ -9,7 +9,7 @@ By default, obsi now adapts to the vault's real folder layout instead of assumin
 - **Hybrid engine** — Uses Obsidian official CLI when running, falls back to direct file operations when not
 - **Smart routing** — Auto-classifies notes into PARA folders based on content keywords
 - **Agent-friendly** — JSON-compatible output, stdin support, designed for AI agent workflows
-- **Claude Code integration** — Ships as a Claude Code plugin with `/obsi:note`, `/obsi:collect`, `/obsi:organize` slash commands
+- **Claude Code integration** — Ships as a Claude Code plugin with `/obsi:note`, `/obsi:organize` slash commands
 
 ## Install
 
@@ -55,7 +55,7 @@ Add to your `~/.claude/settings.json`:
 }
 ```
 
-Restart Claude Code. You'll get `/obsi:note`, `/obsi:collect`, `/obsi:organize` commands.
+Restart Claude Code. You'll get `/obsi:note`, `/obsi:organize` commands.
 
 ## Commands
 
@@ -163,20 +163,6 @@ obsi search "docker" --tags "devops"
 | `-a, --area <name>` | Limit search to an area |
 | `-t, --tags <tags>` | Filter by tags |
 | `-l, --limit <n>` | Max results (default: 20) |
-
-### `obsi collect`
-
-Collect content from a URL or text and save as a note.
-
-```bash
-# Collect from URL
-obsi collect "https://example.com/article" --area "技术与工具" --tags "reference"
-
-# Collect text
-obsi collect --text "Some text to save" --title "Quick Capture"
-```
-
-> **Tip:** When used via Claude Code's `/obsi:collect` command, URLs are fetched and summarized automatically before saving.
 
 ### `obsi organize`
 
@@ -288,7 +274,6 @@ obsi/
 │   └── marketplace.json
 ├── commands/              # Claude Code slash commands
 │   ├── note.md            # /obsi:note
-│   ├── collect.md         # /obsi:collect
 │   └── organize.md        # /obsi:organize
 ├── src/
 │   ├── index.ts           # CLI entry point (Commander.js)

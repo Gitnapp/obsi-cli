@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "obsi",
-      "description": "Agent-powered Obsidian note management. Create, search, collect, and organize notes via CLI commands.",
+      "description": "Agent-powered Obsidian note management. Create, search, and organize notes via CLI commands.",
       "version": "0.1.0",
       "source": "./"
     }
