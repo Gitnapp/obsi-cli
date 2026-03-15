@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createRequire } from 'module'
 import { Command } from 'commander'
 import { initCommand } from './commands/init.js'
 import { noteCommand } from './commands/note.js'
@@ -10,12 +11,15 @@ import { statusCommand } from './commands/status.js'
 import { distillCommand } from './commands/distill.js'
 import { archiveCommand } from './commands/archive.js'
 
+const require = createRequire(import.meta.url)
+const { version } = require('../package.json') as { version: string }
+
 const program = new Command()
 
 program
   .name('obsi')
   .description('Agent-powered CLI for Obsidian note management')
-  .version('0.1.0')
+  .version(version)
 
 program
   .command('init')

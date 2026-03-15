@@ -8,7 +8,7 @@
     {
       "name": "obsi",
       "description": "Agent-powered Obsidian note management. Create, search, and organize notes via CLI commands.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "source": "./"
     }
   ]
