@@ -25,9 +25,8 @@ obsi organize tags [--path "<path>"]
 ```
 
 3. For inbox processing:
-   - Show the list of pending notes
-   - For each note, suggest a classification
-   - Help the user move notes to the right location
+   - Run `obsi organize inbox` — shows pending notes and a `◆ agent:` block
+   - Follow the agent prompt: read each note, determine the best area, run the pre-filled `obsi distill "<file>" --area "<area>"` commands
 
 ## Available areas for MOC:
 健康, 技术与工具, 财富, 阅读, 唱歌, 商业, 服饰, 英语与职业, 饮食

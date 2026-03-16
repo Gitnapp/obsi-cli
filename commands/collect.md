@@ -9,41 +9,36 @@ Fetch, summarize, and save web content or text to the Obsidian vault.
 
 ## Instructions
 
-1. If a URL is provided:
-   - Use WebFetch to get the page content
-   - Summarize the key points
-   - Structure as markdown with Source, Key Points, and Notes sections
-   - Save with `obsi note`
-2. If text is provided:
-   - Structure and organize the text
-   - Save with `obsi collect --text`
+### For URLs:
 
-## For URLs:
+1. Run `obsi collect "<url>"` — the CLI will output a `◆ agent:` prompt block
+2. Follow the prompt: fetch the URL with WebFetch, extract title and key points
+3. Save with the command shown in the prompt
 
 ```bash
-# After fetching and summarizing:
-obsi note "<article title>" --content "<structured summary>" --resource "Collected" --tags "<tags>" --source web --type research
+obsi collect "https://..."
+# → CLI outputs: ◆ agent: fetch + summarize + obsi note command to run
 ```
 
-## For text:
+### For text:
 
 ```bash
 obsi collect --text "<text>" --title "<title>" [--area "<area>"]
 ```
 
-## Content template for collected notes:
+## Content structure for collected notes:
 
 ```markdown
 ## Source
 
 [Article Title](url)
 
-## Key Points
+## 要点
 
 - Point 1
 - Point 2
 
-## Notes
+## 笔记
 
 (additional context)
 ```

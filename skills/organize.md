@@ -35,5 +35,6 @@ obsi organize tags [--path "<path>"]
 ## Process:
 1. Ask user which operation they want (or infer from context)
 2. Run the command
-3. For inbox: help user decide where each note should go
+3. For inbox: run `obsi organize inbox`, then follow the `◆ agent:` prompt —
+   read each note, pick the best area, run the pre-filled `obsi distill` commands
 4. For MOC: show the generated index

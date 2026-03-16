@@ -17,10 +17,10 @@ Fetch, summarize, and save web content or text to the Obsidian vault.
 ## For URLs:
 
 ```bash
-# Step 1: Fetch the content using WebFetch tool
-# Step 2: Summarize key points
-# Step 3: Save with obsi
-obsi note "<article title>" --content "<structured summary>" --resource "Collected" --tags "<auto-tags>" --source web --type research
+# Step 1: Run obsi collect — CLI outputs ◆ agent: prompt with instructions
+obsi collect "<url>"
+# Step 2: Follow the prompt: WebFetch the URL, extract title and key points
+# Step 3: Run the obsi note command shown in the prompt
 ```
 
 ## For text:
@@ -36,12 +36,12 @@ obsi collect --text "<user provided text>" --title "<title>" [--area "<area>"]
 
 [Article Title](url)
 
-## Key Points
+## 要点
 
 - Point 1
 - Point 2
 
-## Notes
+## 笔记
 
 User's additional context or thoughts
 ```
