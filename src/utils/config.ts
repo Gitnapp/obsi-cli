@@ -13,6 +13,8 @@ interface ObsiConfig {
     archive?: string
   }
   inbox?: string
+  distilled?: string
+  archived?: string
   knownAreas?: string[]
 }
 
@@ -44,7 +46,9 @@ export const PARA = {
   archive: config?.para?.archive ?? '4. Archive',
 } as const
 
-export const INBOX_DIR = config?.inbox ?? 'Inbox'
+export const INBOX_DIR = config?.inbox ?? 'Input'
+export const DISTILLED_DIR = config?.distilled ?? 'Distilled'
+export const ARCHIVED_DIR = config?.archived ?? 'Archived'
 export const TEMPLATES_DIR = join(PARA.archive, '_Templates')
 
 export const KNOWN_AREAS: readonly string[] = config?.knownAreas ?? [

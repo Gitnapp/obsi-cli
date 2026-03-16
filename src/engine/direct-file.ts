@@ -3,7 +3,7 @@ import { existsSync } from 'fs'
 import { join, basename, relative } from 'path'
 import { glob } from 'glob'
 import type { ExecutionEngine, NoteOptions, SearchOptions, SearchResult, VaultStats } from './types.js'
-import { getVaultPath, INBOX_DIR } from '../utils/config.js'
+import { getVaultPath, INBOX_DIR, DISTILLED_DIR, PARA } from '../utils/config.js'
 import { buildNoteContent, createFrontmatter, parseNote } from '../utils/frontmatter.js'
 import { classifyNote } from '../routing/classifier.js'
 
@@ -71,7 +71,7 @@ export class DirectFileEngine implements ExecutionEngine {
   async search(query: string, opts?: SearchOptions): Promise<SearchResult[]> {
     const limit = opts?.limit ?? 20
     const searchPath = opts?.area
-      ? getVaultPath('3. Areas', opts.area)
+      ? getVaultPath(DISTILLED_DIR, opts.area)
       : getVaultPath()
 
     const files = await glob('**/*.md', { cwd: searchPath, absolute: true })
@@ -124,9 +124,7 @@ export class DirectFileEngine implements ExecutionEngine {
     let lastModified = ''
     try {
       let latestTime = 0
-      // Sample recent files only (full scan too slow)
-      const sample = files.slice(0, 50)
-      for (const f of sample) {
+      for (const f of files) {
         const s = await stat(getVaultPath(f))
         if (s.mtimeMs > latestTime) {
           latestTime = s.mtimeMs
@@ -145,9 +143,8 @@ export class DirectFileEngine implements ExecutionEngine {
   }
 
   private resolveTargetDir(opts: NoteOptions): string {
-    if (opts.area) return join('3. Areas', opts.area)
-    if (opts.project) return join('2. Projects', opts.project)
-    if (opts.resource) return join('1. Resources', opts.resource)
+    if (opts.area) return join(DISTILLED_DIR, opts.area)
+    if (opts.project) return join(PARA.projects, opts.project)
 
     // Auto-classify
     const classified = classifyNote(opts.title, opts.content, opts.tags)

@@ -6,7 +6,6 @@ interface CollectCommandOptions {
   text?: string
   title?: string
   area?: string
-  resource?: string
   tags?: string
 }
 
@@ -16,36 +15,46 @@ export async function collectCommand(urlOrEmpty: string | undefined, opts: Colle
     process.exit(1)
   }
 
-  let content: string
-  let title: string
-
+  // URL collection: delegate to calling agent
   if (urlOrEmpty && urlOrEmpty.startsWith('http')) {
-    // URL collection - for now, store URL reference
-    // Full content extraction would require a fetcher (future enhancement)
-    title = opts.title ?? urlOrEmpty
-    content = `## Source\n\n${urlOrEmpty}\n\n## Notes\n\n${opts.text ?? '(待整理)'}`
-    console.log(chalk.dim('URL captured. Content extraction available when used with Claude Code /collect skill.'))
-  } else if (opts.text) {
-    title = opts.title ?? `Collected ${new Date().toISOString().slice(0, 10)}`
-    content = opts.text
-  } else {
-    console.log(chalk.yellow('Provide a URL or --text'))
-    console.log('Usage: obsi collect "https://..." or obsi collect --text "..."')
-    process.exit(1)
+    const areaHint = opts.area ? ` --area "${opts.area}"` : ''
+    const tagsHint = opts.tags ? ` --tags "${opts.tags}"` : ''
+    agentPrompt([
+      `Fetch the content from: ${urlOrEmpty}`,
+      `Extract the title and summarize the key points in Chinese.`,
+      `Then save it with:`,
+      `  obsi note "<title>" --content "<summary>" --source web --type research${areaHint}${tagsHint}`,
+      `Content structure to use:`,
+      `  ## Source\\n\\n[title](${urlOrEmpty})\\n\\n## 要点\\n\\n- ...\\n\\n## 笔记\\n\\n...`,
+    ])
+    return
   }
 
-  const tags = opts.tags?.split(',').map(t => t.trim()).filter(Boolean) ?? []
-  const engine = await getEngine()
+  // Plain text collection: execute directly
+  if (opts.text) {
+    const title = opts.title ?? `Collected ${new Date().toISOString().slice(0, 10)}`
+    const tags = opts.tags?.split(',').map(t => t.trim()).filter(Boolean) ?? []
+    const engine = await getEngine()
+    const path = await engine.createNote({
+      title,
+      content: opts.text,
+      area: opts.area,
+      tags,
+      source: 'web',
+      type: 'research',
+    })
+    console.log(chalk.green('Collected: ') + chalk.cyan(path))
+    return
+  }
 
-  const path = await engine.createNote({
-    title,
-    content,
-    area: opts.area,
-    resource: opts.resource ?? 'Collected',
-    tags,
-    source: 'web',
-    type: 'research',
-  })
+  console.log(chalk.yellow('Provide a URL or --text'))
+  console.log('Usage: obsi collect "https://..." or obsi collect --text "..."')
+  process.exit(1)
+}
 
-  console.log(chalk.green('Collected: ') + chalk.cyan(path))
+function agentPrompt(lines: string[]) {
+  console.log(chalk.magenta('◆ agent:'))
+  for (const line of lines) {
+    console.log('  ' + line)
+  }
 }

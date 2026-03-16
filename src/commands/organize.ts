@@ -2,7 +2,7 @@ import chalk from 'chalk'
 import { readFile, writeFile, readdir } from 'fs/promises'
 import { join, basename } from 'path'
 import { glob } from 'glob'
-import { getVaultPath, INBOX_DIR, KNOWN_AREAS } from '../utils/config.js'
+import { getVaultPath, INBOX_DIR, DISTILLED_DIR, KNOWN_AREAS } from '../utils/config.js'
 import { parseNote } from '../utils/frontmatter.js'
 
 interface OrganizeCommandOptions {
@@ -60,7 +60,12 @@ async function organizeInbox() {
     console.log()
   }
 
-  console.log(chalk.dim('Use "obsi note <title> --area <area>" to reclassify, or move files manually.'))
+  console.log(chalk.magenta('◆ agent:'))
+  console.log(`  Read each file above, determine the best area, then distill:`)
+  for (const file of files) {
+    console.log(chalk.dim(`  obsi distill "${file}" --area "<area>"`))
+  }
+  console.log(`  Available areas: ${KNOWN_AREAS.join(', ')}`)
 }
 
 async function generateMoc(area?: string) {
@@ -70,7 +75,7 @@ async function generateMoc(area?: string) {
     return
   }
 
-  const areaPath = getVaultPath('3. Areas', area)
+  const areaPath = getVaultPath(DISTILLED_DIR, area)
   let files: string[]
   try {
     files = await glob('**/*.md', { cwd: areaPath })

@@ -7,6 +7,7 @@ import { dailyCommand } from './commands/daily.js'
 import { searchCommand } from './commands/search.js'
 import { collectCommand } from './commands/collect.js'
 import { organizeCommand } from './commands/organize.js'
+import { distillCommand } from './commands/distill.js'
 import { statusCommand } from './commands/status.js'
 
 const program = new Command()
@@ -72,6 +73,13 @@ program
   .option('-p, --path <path>', 'Target path for tags command')
   .option('-a, --area <name>', 'Area name for moc command')
   .action(organizeCommand)
+
+program
+  .command('distill')
+  .description('Move a note from Input to Distilled')
+  .argument('[filename]', 'Filename in Input/ (partial match ok); omit to list')
+  .option('-a, --area <name>', 'Target area within Distilled')
+  .action(distillCommand)
 
 program
   .command('status')
